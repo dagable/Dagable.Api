@@ -1,3 +1,4 @@
+using Dagable.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -41,6 +42,8 @@ namespace Dagable.Api
                 options.EnableEndpointRouting = false;
             })
                 .AddAuthorization();
+
+            services.AddScoped<IDagServices, DagServices>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
