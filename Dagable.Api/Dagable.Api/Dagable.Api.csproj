@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Dagable.Api.Core\Dagable.Api.Core.csproj" />
     <ProjectReference Include="..\Dagable.Api.Services\Dagable.Api.Services.csproj" />
   </ItemGroup>
 

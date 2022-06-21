@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dagable.Api", "Dagable.Api\Dagable.Api.csproj", "{54490E75-60C8-4C44-8DD1-8DD3BA967A90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dagable.Api.Services", "Dagable.Api.Services\Dagable.Api.Services.csproj", "{1731F423-E008-4532-AA8F-E83081FC649B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dagable.Api.Services", "Dagable.Api.Services\Dagable.Api.Services.csproj", "{1731F423-E008-4532-AA8F-E83081FC649B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dagable.Api.Core", "Dagable.Api.Core\Dagable.Api.Core.csproj", "{AA840BE6-374E-4ED3-BB26-F03D6E4FCE21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1731F423-E008-4532-AA8F-E83081FC649B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1731F423-E008-4532-AA8F-E83081FC649B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1731F423-E008-4532-AA8F-E83081FC649B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA840BE6-374E-4ED3-BB26-F03D6E4FCE21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA840BE6-374E-4ED3-BB26-F03D6E4FCE21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA840BE6-374E-4ED3-BB26-F03D6E4FCE21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA840BE6-374E-4ED3-BB26-F03D6E4FCE21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

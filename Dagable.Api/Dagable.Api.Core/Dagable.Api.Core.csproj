@@ -8,8 +8,4 @@
     <PackageReference Include="Dagable.Core" Version="0.0.1-alpha-20220621162643" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Dagable.Api.Core\Dagable.Api.Core.csproj" />
-  </ItemGroup>
-
 </Project>
