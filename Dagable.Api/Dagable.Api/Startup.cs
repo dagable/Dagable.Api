@@ -27,9 +27,8 @@ namespace Dagable.Api
                 .AddJwtBearer("Bearer", options =>
                 {
                     // identity server issuing token
-                    options.Authority = "https://localhost:5010";
-                    options.RequireHttpsMetadata = false;
-
+                    options.Authority = Configuration.GetValue<string>("Authority");
+                    options.RequireHttpsMetadata = true;
                     // allow self-signed SSL certsnpm 
                     options.BackchannelHttpHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = delegate { return true; } };
 
@@ -41,7 +40,7 @@ namespace Dagable.Api
             {
                 options.EnableEndpointRouting = false;
             })
-                .AddAuthorization();
+            .AddAuthorization();
 
             services.AddScoped<IDagServices, DagServices>();
         }
@@ -55,7 +54,7 @@ namespace Dagable.Api
 
             app.UseCors(builder =>
                  builder
-                   .WithOrigins("http://localhost:3000")
+                   .WithOrigins(Configuration.GetValue<string>("AppUrl"))
                    .AllowAnyHeader()
                    .AllowAnyMethod()
                    .AllowCredentials()
