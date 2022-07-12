@@ -28,6 +28,7 @@ namespace Dagable.Api.Controllers
 
         [HttpPost]
         [Route("standard")]
+        [Authorize]
         public string Standard(GenerateStandardGraphDTO graphDetails)
         {
             return _dagServices.CreateDag(graphDetails);
@@ -35,6 +36,7 @@ namespace Dagable.Api.Controllers
 
         [HttpPost]
         [Route("critical-path")]
+        [Authorize]
         public string CriticalPath(GenerateCriticalGraphDTO graphDetails)
         {
             return _dagServices.CreateCriticalPathDag(graphDetails);
