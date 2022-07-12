@@ -1,4 +1,4 @@
-﻿using Dagable.Api.RequestModels;
+﻿using Dagable.Api.Core;
 using Dagable.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,17 +27,17 @@ namespace Dagable.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize]
-        public string Standard(GenerateGraphDTO grapDetails)
+        [Route("standard")]
+        public string Standard(GenerateStandardGraphDTO graphDetails)
         {
-            return _dagServices.CreateDag(grapDetails);
+            return _dagServices.CreateDag(graphDetails);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("critical-path")]
-        public string CriticalPath()
+        public string CriticalPath(GenerateCriticalGraphDTO graphDetails)
         {
-            return _dagServices.CreateCriticalPathDag();
+            return _dagServices.CreateCriticalPathDag(graphDetails);
         }
     }
 }

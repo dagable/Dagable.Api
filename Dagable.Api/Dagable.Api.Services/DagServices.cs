@@ -1,4 +1,4 @@
-﻿using Dagable.Api.RequestModels;
+﻿using Dagable.Api.Core;
 using Dagable.Core;
 
 namespace Dagable.Api.Services
@@ -6,8 +6,8 @@ namespace Dagable.Api.Services
     public interface IDagServices
     {
         string CreateDag();
-        string CreateDag(GenerateGraphDTO graphDetails);
-        string CreateCriticalPathDag();
+        string CreateDag(GenerateStandardGraphDTO graphDetails);
+        string CreateCriticalPathDag(GenerateCriticalGraphDTO graphsDetails);
     }
 
     public class DagServices : IDagServices
@@ -18,15 +18,15 @@ namespace Dagable.Api.Services
             return dagGraph.AsJson();
         }
 
-        public string CreateDag(GenerateGraphDTO graphDetails)
+        public string CreateDag(GenerateStandardGraphDTO graphDetails)
         {
             var dagGraph = new DagCreator.Standard(graphDetails.Layers, graphDetails.Nodes, (graphDetails.Percentage / 100)).Generate();
             return dagGraph.AsJson();
         }
 
-        public string CreateCriticalPathDag()
+        public string CreateCriticalPathDag(GenerateCriticalGraphDTO graphDetails)
         {
-            var cpDagGraph = new DagCreator.CriticalPath().Generate();
+            var cpDagGraph = new DagCreator.CriticalPath(graphDetails.MinComp, graphDetails.MaxComp, graphDetails.MinComm, graphDetails.MaxComm, graphDetails.Layers, graphDetails.Nodes, graphDetails.Percentage / 100).Generate();
             return cpDagGraph.AsJson();
         }
     }
