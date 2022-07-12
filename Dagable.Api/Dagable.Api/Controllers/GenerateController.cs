@@ -20,16 +20,24 @@ namespace Dagable.Api.Controllers
         }
 
         [HttpGet]
-        public string Generate()
+        [Route("standard")]
+        public string Standard()
         {
             return _dagServices.CreateDag();
         }
 
         [HttpPost]
         [Authorize]
-        public string Post(GenerateGraphDTO grapDetails)
+        public string Standard(GenerateGraphDTO grapDetails)
         {
             return _dagServices.CreateDag(grapDetails);
+        }
+
+        [HttpGet]
+        [Route("critical-path")]
+        public string CriticalPath()
+        {
+            return _dagServices.CreateCriticalPathDag();
         }
     }
 }

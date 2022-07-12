@@ -6,22 +6,28 @@ namespace Dagable.Api.Services
     public interface IDagServices
     {
         string CreateDag();
-
-        string CreateDag(GenerateGraphDTO grapDetails);
+        string CreateDag(GenerateGraphDTO graphDetails);
+        string CreateCriticalPathDag();
     }
 
     public class DagServices : IDagServices
     {
         public string CreateDag()
         {
-            var dagGraph = new DagCreator().Generate();
+            var dagGraph = new DagCreator.Standard().Generate();
             return dagGraph.AsJson();
         }
 
-        public string CreateDag(GenerateGraphDTO grapDetails)
+        public string CreateDag(GenerateGraphDTO graphDetails)
         {
-            var dagGraph = new DagCreator(grapDetails.Layers, grapDetails.Nodes, (grapDetails.Percentage / 100)).Generate();
+            var dagGraph = new DagCreator.Standard(graphDetails.Layers, graphDetails.Nodes, (graphDetails.Percentage / 100)).Generate();
             return dagGraph.AsJson();
+        }
+
+        public string CreateCriticalPathDag()
+        {
+            var cpDagGraph = new DagCreator.CriticalPath().Generate();
+            return cpDagGraph.AsJson();
         }
     }
 }
