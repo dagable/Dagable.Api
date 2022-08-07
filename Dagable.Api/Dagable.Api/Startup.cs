@@ -1,10 +1,10 @@
 using Dagable.Api.Services;
+using Dagable.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using System.Net.Http;
 
 namespace Dagable.Api
@@ -43,6 +43,7 @@ namespace Dagable.Api
             .AddAuthorization();
 
             services.AddScoped<IDagServices, DagServices>();
+            services.AddDagableCoreServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -12,22 +12,25 @@ namespace Dagable.Api.Services
 
     public class DagServices : IDagServices
     {
+        private readonly IDagCreationService _dagCreationServices;
+        public DagServices(IDagCreationService dagableServices)
+        {
+            _dagCreationServices = dagableServices;
+        }
+
         public string CreateDag()
         {
-            var dagGraph = new DagCreator.Standard().Generate();
-            return dagGraph.AsJson();
+            return _dagCreationServices.GenerateGraphAsString(GraphType.Standard);
         }
 
         public string CreateDag(GenerateStandardGraphDTO graphDetails)
         {
-            var dagGraph = new DagCreator.Standard(graphDetails.Layers, graphDetails.Nodes, (graphDetails.Percentage / 100)).Generate();
-            return dagGraph.AsJson();
+            return _dagCreationServices.GenerateGraphAsString(GraphType.Standard, graphDetails.Layers, graphDetails.Nodes, (graphDetails.Percentage / 100));
         }
 
         public string CreateCriticalPathDag(GenerateCriticalGraphDTO graphDetails)
         {
-            var cpDagGraph = new DagCreator.CriticalPath(graphDetails.MinComp, graphDetails.MaxComp, graphDetails.MinComm, graphDetails.MaxComm, graphDetails.Layers, graphDetails.Nodes, graphDetails.Percentage / 100).Generate();
-            return cpDagGraph.AsJson();
+            return _dagCreationServices.GenerateGraphAsString(GraphType.CriticalPath, graphDetails.MinComp, graphDetails.MaxComp, graphDetails.MinComm, graphDetails.MaxComm, graphDetails.Layers, graphDetails.Nodes, graphDetails.Percentage / 100);
         }
     }
 }
