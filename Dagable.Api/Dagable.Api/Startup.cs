@@ -1,5 +1,6 @@
 using Dagable.Api.Services;
 using Dagable.Core;
+using Dagable.Core.Scheduling;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -42,8 +43,11 @@ namespace Dagable.Api
             })
             .AddAuthorization();
 
-            services.AddScoped<IDagServices, DagServices>();
-            services.AddDagableCoreServices();
+            services
+                .AddScoped<IDagServices, DagServices>()
+                .AddScoped<IDagScheduleServices, DagScheduleServices>()
+                .AddDagableCoreServices()
+                .AddDagableSchedulingServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

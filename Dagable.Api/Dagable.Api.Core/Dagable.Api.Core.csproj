@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dagable.Core" Version="0.0.1-alpha-20220804172032" />
+    <PackageReference Include="Dagable.Core.Scheduling" Version="0.0.1-alpha-20221011161445" />
   </ItemGroup>
 
 </Project>

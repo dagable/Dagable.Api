@@ -3,6 +3,8 @@ using Dagable.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Dagable.Api.Controllers
 {
@@ -12,11 +14,13 @@ namespace Dagable.Api.Controllers
     {
         private readonly ILogger<GenerateController> _logger;
         private readonly IDagServices _dagServices;
+        private readonly IDagScheduleServices _dagScheduleServices;
 
-        public GenerateController(ILogger<GenerateController> logger, IDagServices dagServices)
+        public GenerateController(ILogger<GenerateController> logger, IDagServices dagServices, IDagScheduleServices dagScheduleServices)
         {
             _logger = logger;
             _dagServices = dagServices;
+            _dagScheduleServices = dagScheduleServices;
         }
 
         [HttpGet]
@@ -24,6 +28,17 @@ namespace Dagable.Api.Controllers
         public string Standard()
         {
             return _dagServices.CreateDag();
+        }
+
+        [HttpGet]
+        [Route("standardSchedule")]
+        public JsonResult StandardSchedule()
+        {
+            return new JsonResult(_dagScheduleServices.CreateSchedule(3), new JsonSerializerOptions()
+            {
+                WriteIndented = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            });
         }
 
         [HttpPost]
