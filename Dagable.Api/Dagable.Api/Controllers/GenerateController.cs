@@ -52,9 +52,19 @@ namespace Dagable.Api.Controllers
         [HttpPost]
         [Route("critical-path")]
         [Authorize]
-        public string CriticalPath(GenerateCriticalGraphDTO graphDetails)
+        public JsonResult CriticalPath(GenerateCriticalGraphDTO graphDetails)
         {
-            return _dagServices.CreateCriticalPathDag(graphDetails);
+            var graph = _dagServices.CreateCriticalPathDag(graphDetails);
+            var scheduled = _dagScheduleServices.CreateSchedule(3, graph);
+            return new JsonResult(new
+            {
+                graph = graph.ToString(),
+                schedule = scheduled
+            }, new JsonSerializerOptions()
+            {
+                WriteIndented = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            }); ;
         }
     }
 }

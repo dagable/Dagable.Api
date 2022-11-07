@@ -1,12 +1,13 @@
 ﻿using Dagable.Core;
 using Dagable.Core.Scheduling;
+using Dagable.Core.Scheduling.Models.DTO;
 using System.Collections.Generic;
 
 namespace Dagable.Api.Services
 {
     public interface IDagScheduleServices
     {
-        Dictionary<int, List<ScheduledNode>> CreateSchedule(int processors);
+        IScheduledGraph CreateSchedule(int processors, ICriticalPathTaskGraph graph = null);
     }
 
     public class DagScheduleServices : IDagScheduleServices
@@ -20,9 +21,12 @@ namespace Dagable.Api.Services
             _taskGraphSchedulingService = taskGraphSchedulingService;
         }
 
-        public Dictionary<int, List<ScheduledNode>> CreateSchedule(int processors)
+        public IScheduledGraph CreateSchedule(int processors, ICriticalPathTaskGraph graph = null)
         {
-            var graph = _dagCreationServices.GenerateCriticalPathTaskGraph();
+            if(graph == null)
+            {
+                graph = _dagCreationServices.GenerateCriticalPathTaskGraph();
+            }
             return _taskGraphSchedulingService.DLSchedule(processors, graph);
         }
     }

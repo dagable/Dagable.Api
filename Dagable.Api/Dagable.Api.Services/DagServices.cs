@@ -7,7 +7,7 @@ namespace Dagable.Api.Services
     {
         string CreateDag();
         string CreateDag(GenerateStandardGraphDTO graphDetails);
-        string CreateCriticalPathDag(GenerateCriticalGraphDTO graphsDetails);
+        ICriticalPathTaskGraph CreateCriticalPathDag(GenerateCriticalGraphDTO graphsDetails);
     }
 
     public class DagServices : IDagServices
@@ -30,9 +30,9 @@ namespace Dagable.Api.Services
             return _dagCreationServices.GenerateStandardTaskGraph(graphDetails.Layers, graphDetails.Nodes, (graphDetails.Percentage / 100)).ToString();
         }
 
-        public string CreateCriticalPathDag(GenerateCriticalGraphDTO graphDetails)
+        public ICriticalPathTaskGraph CreateCriticalPathDag(GenerateCriticalGraphDTO graphDetails)
         {
-            return _dagCreationServices.GenerateCriticalPathTaskGraph(graphDetails.Layers, graphDetails.Nodes, graphDetails.Percentage / 100, graphDetails.MinComp, graphDetails.MaxComp, graphDetails.MinComm, graphDetails.MaxComm).ToString();
+            return _dagCreationServices.GenerateCriticalPathTaskGraph(graphDetails.Layers, graphDetails.Nodes, graphDetails.Percentage / 100, graphDetails.MinComp, graphDetails.MaxComp, graphDetails.MinComm, graphDetails.MaxComm);
         }
     }
 }
