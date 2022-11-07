@@ -6,5 +6,6 @@
         public int MinComm { get; set; }
         public int MaxComp { get; set;}
         public int MinComp { get; set; }
+        public int Processors { get; set; }
     }
 }

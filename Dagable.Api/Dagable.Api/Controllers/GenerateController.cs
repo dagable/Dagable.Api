@@ -55,7 +55,7 @@ namespace Dagable.Api.Controllers
         public JsonResult CriticalPath(GenerateCriticalGraphDTO graphDetails)
         {
             var graph = _dagServices.CreateCriticalPathDag(graphDetails);
-            var scheduled = _dagScheduleServices.CreateSchedule(3, graph);
+            var scheduled = _dagScheduleServices.CreateSchedule(graphDetails.Processors, graph);
             return new JsonResult(new
             {
                 graph = graph.ToString(),
