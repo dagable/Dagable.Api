@@ -13,10 +13,10 @@ namespace Dagable.Api.Controllers
     public class GenerateController : ControllerBase
     {
         private readonly ILogger<GenerateController> _logger;
-        private readonly IDagServices _dagServices;
+        private readonly IDagGenerationServices _dagServices;
         private readonly IDagScheduleServices _dagScheduleServices;
 
-        public GenerateController(ILogger<GenerateController> logger, IDagServices dagServices, IDagScheduleServices dagScheduleServices)
+        public GenerateController(ILogger<GenerateController> logger, IDagGenerationServices dagServices, IDagScheduleServices dagScheduleServices)
         {
             _logger = logger;
             _dagServices = dagServices;

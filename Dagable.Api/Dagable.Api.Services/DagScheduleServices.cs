@@ -1,12 +1,17 @@
 ﻿using Dagable.Core;
 using Dagable.Core.Scheduling;
 using Dagable.Core.Scheduling.Models.DTO;
-using System.Collections.Generic;
 
 namespace Dagable.Api.Services
 {
     public interface IDagScheduleServices
     {
+        /// <summary>
+        /// Method used to schedule a critical path task graph
+        /// </summary>
+        /// <param name="processors">The number of processors that can be used when scheduling</param>
+        /// <param name="graph">The graph we want to schedule</param>
+        /// <returns>A scheduled task graph</returns>
         IScheduledGraph CreateSchedule(int processors, ICriticalPathTaskGraph graph = null);
     }
 
@@ -21,6 +26,7 @@ namespace Dagable.Api.Services
             _taskGraphSchedulingService = taskGraphSchedulingService;
         }
 
+        /// <inheritdoc cref="IDagScheduleServices.CreateSchedule(int, ICriticalPathTaskGraph)"/>
         public IScheduledGraph CreateSchedule(int processors, ICriticalPathTaskGraph graph = null)
         {
             if(graph == null)

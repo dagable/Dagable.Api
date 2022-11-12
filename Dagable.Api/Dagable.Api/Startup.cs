@@ -44,7 +44,7 @@ namespace Dagable.Api
             .AddAuthorization();
 
             services
-                .AddScoped<IDagServices, DagServices>()
+                .AddScoped<IDagGenerationServices, DagGenerationServices>()
                 .AddScoped<IDagScheduleServices, DagScheduleServices>()
                 .AddDagableCoreServices()
                 .AddDagableSchedulingServices();
