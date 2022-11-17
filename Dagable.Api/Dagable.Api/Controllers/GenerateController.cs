@@ -1,5 +1,6 @@
 ﻿using Dagable.Api.Core;
 using Dagable.Api.Services;
+using Dagable.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -25,28 +26,24 @@ namespace Dagable.Api.Controllers
 
         [HttpGet]
         [Route("standard")]
-        public string Standard()
+        public JsonResult Standard()
         {
-            return _dagServices.CreateDag();
-        }
-
-        [HttpGet]
-        [Route("standardSchedule")]
-        public JsonResult StandardSchedule()
-        {
-            return new JsonResult(_dagScheduleServices.CreateSchedule(3), new JsonSerializerOptions()
+            var graph = _dagServices.CreateDag();
+            return new JsonResult(new
             {
-                WriteIndented = true,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                graph,
             });
         }
 
         [HttpPost]
         [Route("standard")]
         [Authorize]
-        public string Standard(GenerateStandardGraphDTO graphDetails)
+        public JsonResult Standard(GenerateStandardGraphDTO graphDetails)
         {
-            return _dagServices.CreateDag(graphDetails);
+            return new JsonResult(new
+            {
+                graph = _dagServices.CreateDag(graphDetails),
+            });
         }
 
         [HttpPost]
@@ -58,13 +55,9 @@ namespace Dagable.Api.Controllers
             var scheduled = _dagScheduleServices.CreateSchedule(graphDetails.Processors, graph);
             return new JsonResult(new
             {
-                graph = graph.ToString(),
+                graph,
                 schedule = scheduled
-            }, new JsonSerializerOptions()
-            {
-                WriteIndented = true,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-            }); ;
+            });
         }
     }
 }

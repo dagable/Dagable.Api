@@ -29,10 +29,7 @@ namespace Dagable.Api.Services
         /// <inheritdoc cref="IDagScheduleServices.CreateSchedule(int, ICriticalPathTaskGraph)"/>
         public IScheduledGraph CreateSchedule(int processors, ICriticalPathTaskGraph graph = null)
         {
-            if(graph == null)
-            {
-                graph = _dagCreationServices.GenerateCriticalPathTaskGraph();
-            }
+            graph ??= _dagCreationServices.GenerateCriticalPathTaskGraph();
             return _taskGraphSchedulingService.DLSchedule(processors, graph);
         }
     }
