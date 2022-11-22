@@ -1,11 +1,8 @@
 ﻿using Dagable.Api.Core;
 using Dagable.Api.Services;
-using Dagable.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Dagable.Api.Controllers
 {
@@ -37,7 +34,6 @@ namespace Dagable.Api.Controllers
 
         [HttpPost]
         [Route("standard")]
-        [Authorize]
         public JsonResult Standard(GenerateStandardGraphDTO graphDetails)
         {
             return new JsonResult(new
