@@ -26,11 +26,11 @@ namespace Dagable.Api.Services
         ICriticalPathTaskGraph CreateCriticalPathDag(GenerateCriticalGraphDTO graphsDetails);
     }
 
-    public class DagGenerationServices : IDagGenerationServices
+    public class GraphGenerationServices : IDagGenerationServices
     {
         private readonly IDagCreationService _dagCreationServices;
 
-        public DagGenerationServices(IDagCreationService dagableServices)
+        public GraphGenerationServices(IDagCreationService dagableServices)
         {
             _dagCreationServices = dagableServices;
         }

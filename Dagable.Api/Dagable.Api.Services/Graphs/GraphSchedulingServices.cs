@@ -12,22 +12,22 @@ namespace Dagable.Api.Services
         /// <param name="processors">The number of processors that can be used when scheduling</param>
         /// <param name="graph">The graph we want to schedule</param>
         /// <returns>A scheduled task graph</returns>
-        IScheduledGraph CreateSchedule(int processors, ICriticalPathTaskGraph graph = null);
+        IScheduledGraph ScheduleGraph(int processors, ICriticalPathTaskGraph graph = null);
     }
 
-    public class DagScheduleServices : IDagScheduleServices
+    public class GraphSchedulingServices : IDagScheduleServices
     {
         private readonly IDagCreationService _dagCreationServices;
         private readonly ITaskGraphSchedulingService _taskGraphSchedulingService;
 
-        public DagScheduleServices(IDagCreationService dagableServices, ITaskGraphSchedulingService taskGraphSchedulingService)
+        public GraphSchedulingServices(IDagCreationService dagableServices, ITaskGraphSchedulingService taskGraphSchedulingService)
         {
             _dagCreationServices = dagableServices;
             _taskGraphSchedulingService = taskGraphSchedulingService;
         }
 
-        /// <inheritdoc cref="IDagScheduleServices.CreateSchedule(int, ICriticalPathTaskGraph)"/>
-        public IScheduledGraph CreateSchedule(int processors, ICriticalPathTaskGraph graph = null)
+        /// <inheritdoc cref="IDagScheduleServices.ScheduleGraph(int, ICriticalPathTaskGraph)"/>
+        public IScheduledGraph ScheduleGraph(int processors, ICriticalPathTaskGraph graph = null)
         {
             graph ??= _dagCreationServices.GenerateCriticalPathTaskGraph();
             return _taskGraphSchedulingService.DLSchedule(processors, graph);

@@ -7,6 +7,10 @@ Dagable.Api/.vs/
 
 Dagable.Api/Dagable.Api.Core/bin
 Dagable.Api/Dagable.Api.Core/obj
+Dagable.Api/Dagable.DataAccess/bin
+Dagable.Api/Dagable.DataAccess/obj
+Dagable.Api/Dagable.DataAccess.Migrations/bin
+Dagable.Api/Dagable.DataAccess.Migrations/obj
 Dagable.Api/packages/
 Dagable.Api/Dagable.Api/Properties/PublishProfiles/ubuntu.lan_5000.pubxml.user
 Dagable.Api/Dagable.Api/Properties/PublishProfiles/ubuntu.lan_5000.pubxml
