@@ -40,6 +40,7 @@ namespace Dagable.Api.Startup
                .AddScoped<IDagScheduleServices, GraphSchedulingServices>()
                .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
                .AddScoped<IUserRepository, UserRepository>()
+               .AddScoped<IUserServices, UserServices>()
                .AddDagableCoreServices()
                .AddDagableSchedulingServices()
                .AddControllers();

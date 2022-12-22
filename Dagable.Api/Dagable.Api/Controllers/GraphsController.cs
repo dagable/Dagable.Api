@@ -8,21 +8,18 @@ using Microsoft.Extensions.Logging;
 
 namespace Dagable.Api.Controllers
 {
-    [Route("[controller]")]
-    [ApiController]
+    [Route("[controller]"), ApiController]
     public class GraphsController : ControllerBase
     {
         private readonly ILogger<GraphsController> _logger;
         private readonly IDagScheduleServices _dagScheduleServices;
         private readonly IDagGenerationServices _dagServices;
-        private readonly IUserRepository _user;
 
-        public GraphsController(ILogger<GraphsController> logger, IDagGenerationServices dagServices, IDagScheduleServices dagScheduleServices, IUserRepository user)
+        public GraphsController(ILogger<GraphsController> logger, IDagGenerationServices dagServices, IDagScheduleServices dagScheduleServices)
         {
             _logger = logger;
             _dagServices = dagServices;
             _dagScheduleServices = dagScheduleServices;
-            _user = user;
         }
 
         #region CRUD DB
@@ -48,7 +45,6 @@ namespace Dagable.Api.Controllers
         [Route("generate/standard")]
         public IActionResult Standard()
         {
-            var user = _user.GetLoggedInUser();
             var graph = _dagServices.CreateDag();
             return new JsonResult(new
             {

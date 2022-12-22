@@ -3,6 +3,7 @@ using System;
 using Dagable.DataAccess.Migrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dagable.DataAccess.Migrations.Migrations
 {
     [DbContext(typeof(DagableDbContext))]
-    partial class DagableDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221222151112_changedUserToGuid")]
+    partial class changedUserToGuid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

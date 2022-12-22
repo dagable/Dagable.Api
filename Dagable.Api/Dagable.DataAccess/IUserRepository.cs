@@ -1,9 +1,10 @@
-﻿using System.Security.Claims;
+﻿using Dagable.Api.Core.User;
 
 namespace Dagable.DataAccess
 {
     public interface IUserRepository
     {
-        IEnumerable<Claim> GetLoggedInUser();
+        Task<UserSettingsDTO> GetUserSettings(Guid userId);
+        Task<UserSettingsDTO> UpdateUserSettings(Guid userId, UserSettingsDTO userSettings);
     }
 }

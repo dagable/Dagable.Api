@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Dagable.Api.Core\Dagable.Api.Core.csproj" />
     <ProjectReference Include="..\Dagable.DataAccess.Migrations\Dagable.DataAccess.Migrations.csproj" />
   </ItemGroup>
 

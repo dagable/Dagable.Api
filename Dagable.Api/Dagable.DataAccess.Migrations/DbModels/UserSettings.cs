@@ -8,7 +8,7 @@ namespace Dagable.DataAccess.Migrations.DbModels
     {
         [Key]
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public string NodeColor { get; set; }
         public string NodeStyle { get; set; }
         public bool IsVerticalLayout { get; set; }

@@ -7,7 +7,7 @@ namespace Dagable.DataAccess.Migrations.DbModels
     public class User
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public UserSettings Settings { get; set; }     
         public virtual ICollection<Graph> Graphs { get; set;}

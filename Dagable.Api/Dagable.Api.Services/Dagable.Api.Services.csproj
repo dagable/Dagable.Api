@@ -6,10 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="Dagable.Core.Scheduling" Version="0.0.1-alpha-20221206130816" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Dagable.Api.Core\Dagable.Api.Core.csproj" />
+    <ProjectReference Include="..\Dagable.DataAccess\Dagable.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
