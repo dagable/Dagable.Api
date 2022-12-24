@@ -38,7 +38,7 @@ namespace Dagable.Api.Services
         public async Task<List<UserGraphsHeadingDTO>> GetUserGraphs()
         {
             var graphs = await _graphsRepository.FindAllGraphsForUser(GetLoggedInUserId());
-            return graphs.Select(x => new UserGraphsHeadingDTO { CreatedOn = x.CreatedAt, Name = x.Name, Description = x.Description, GraphGuid = x.GraphGuid }).ToList();
+            return graphs.Select(x => new UserGraphsHeadingDTO { CreatedOn = x.CreatedAt, Name = string.IsNullOrEmpty(x.Name) ? x.GraphGuid.ToString() : x.Name, Description = x.Description, GraphGuid = x.GraphGuid }).ToList();
         }
 
         /// <inheritdoc cref="IUserServices.GetUserSettings"/>

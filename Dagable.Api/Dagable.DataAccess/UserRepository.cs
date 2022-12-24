@@ -38,7 +38,12 @@ namespace Dagable.DataAccess
                     UserId = userId,
                     NodeStyle = userSettings.NodeShape,
                     NodeColor = userSettings.NodeColor,
-                    IsVerticalLayout = userSettings.UseVerticalLayout
+                    IsVerticalLayout = userSettings.UseVerticalLayout,
+                    User = new Migrations.DbModels.User()
+                    {
+                        Id = userId,
+                        DisplayName = "unset"
+                    }
                 });
                 await _dbContext.SaveChangesAsync();
                 return userSettings;
