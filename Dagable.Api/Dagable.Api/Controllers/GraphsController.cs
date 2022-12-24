@@ -1,10 +1,12 @@
 ﻿using Dagable.Api.Core;
+using Dagable.Api.Core.Graph;
 using Dagable.Api.Services;
-using Dagable.Core;
-using Dagable.DataAccess;
+using Dagable.Api.Services.Graphs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace Dagable.Api.Controllers
 {
@@ -14,22 +16,39 @@ namespace Dagable.Api.Controllers
         private readonly ILogger<GraphsController> _logger;
         private readonly IDagScheduleServices _dagScheduleServices;
         private readonly IDagGenerationServices _dagServices;
+        private readonly IGraphServices _graphServices;
 
-        public GraphsController(ILogger<GraphsController> logger, IDagGenerationServices dagServices, IDagScheduleServices dagScheduleServices)
+        public GraphsController(ILogger<GraphsController> logger, IDagGenerationServices dagServices, IDagScheduleServices dagScheduleServices, IGraphServices graphServices)
         {
             _logger = logger;
             _dagServices = dagServices;
             _dagScheduleServices = dagScheduleServices;
+            _graphServices = graphServices;
         }
 
         #region CRUD DB
         [HttpPost]
         [Route("save")]
-        public IActionResult Save(ICriticalPathTaskGraph taskGraph)
+        public async Task<IActionResult> Save(SaveGraphDTO taskGraph)
         {
-
-
+            await _graphServices.SaveGraph(taskGraph);    
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("{graphId}")]
+        public async Task<ActionResult> GetGraph(string graphId)
+        {
+            var validGuid = Guid.TryParse(graphId, out Guid parsedGuid);
+            if (!validGuid)
+            {
+                return BadRequest();
+            }
+            var result = await _graphServices.GetGraphWithGuid(parsedGuid);
+            return new JsonResult(new
+            {
+               graph = result,
+            });
         }
         #endregion
 

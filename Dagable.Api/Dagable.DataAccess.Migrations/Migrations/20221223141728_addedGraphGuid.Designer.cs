@@ -3,6 +3,7 @@ using System;
 using Dagable.DataAccess.Migrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dagable.DataAccess.Migrations.Migrations
 {
     [DbContext(typeof(DagableDbContext))]
-    partial class DagableDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221223141728_addedGraphGuid")]
+    partial class addedGraphGuid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,6 +69,7 @@ namespace Dagable.DataAccess.Migrations.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<Guid>("GraphGuid")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Name")
@@ -103,9 +107,6 @@ namespace Dagable.DataAccess.Migrations.Migrations
                     b.Property<string>("Label")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int>("Layer")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

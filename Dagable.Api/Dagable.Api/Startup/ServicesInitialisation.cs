@@ -1,4 +1,5 @@
 ﻿using Dagable.Api.Services;
+using Dagable.Api.Services.Graphs;
 using Dagable.Core;
 using Dagable.Core.Scheduling;
 using Dagable.DataAccess;
@@ -41,6 +42,8 @@ namespace Dagable.Api.Startup
                .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
                .AddScoped<IUserRepository, UserRepository>()
                .AddScoped<IUserServices, UserServices>()
+               .AddScoped<IGraphServices, GraphServices>()
+               .AddScoped<IGraphsRepository, GraphsRepository>()
                .AddDagableCoreServices()
                .AddDagableSchedulingServices()
                .AddControllers();

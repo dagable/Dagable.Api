@@ -8,6 +8,7 @@ namespace Dagable.DataAccess.Migrations.DbModels
     {
         [Key]
         public int Id { get; set; }
+        public Guid GraphGuid { get; set; }
         public Guid UserId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

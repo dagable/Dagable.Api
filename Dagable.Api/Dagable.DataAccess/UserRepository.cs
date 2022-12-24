@@ -13,6 +13,7 @@ namespace Dagable.DataAccess
             _dbContext = dbContext;
         }
 
+        /// <inheritdoc cref="IUserRepository.GetUserSettings(Guid)"/>
         public async Task<UserSettingsDTO> GetUserSettings(Guid userId)
         {
             var userSettings = await _dbContext.UserSettings.FirstOrDefaultAsync(x => x.UserId == userId);
@@ -27,6 +28,7 @@ namespace Dagable.DataAccess
             };
         }
 
+        /// <inheritdoc cref="IUserRepository.UpdateUserSettings(Guid, UserSettingsDTO)"/>
         public async Task<UserSettingsDTO> UpdateUserSettings(Guid userId, UserSettingsDTO userSettings) {
             var dbUserSettings = await _dbContext.UserSettings.FirstOrDefaultAsync(x => x.UserId == userId);
             if(dbUserSettings == null)
