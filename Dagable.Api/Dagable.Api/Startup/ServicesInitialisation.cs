@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Extensions.Logging;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
@@ -17,6 +19,7 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Reflection;
+using System.Text;
 
 namespace Dagable.Api.Startup
 {
@@ -52,14 +55,16 @@ namespace Dagable.Api.Startup
         private static void RegisterAuthDepenedencies(IServiceCollection services, WebApplicationBuilder builder)
         {
             services.AddCors()
-                .AddAuthorization();
-
-            services.AddAuthentication("Bearer")
+                    .AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateAudience = false,
+                    };
                     // identity server issuing token
                     options.Authority = builder.Configuration.GetValue<string>("Authority");
-                    options.RequireHttpsMetadata = true;
+                    options.RequireHttpsMetadata = false;
                     // allow self-signed SSL certsnpm 
                     options.BackchannelHttpHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = delegate { return true; } };
                     // the scope id of this api

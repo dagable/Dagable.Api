@@ -26,7 +26,6 @@ namespace Dagable.Api.Startup
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
 
