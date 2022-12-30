@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dagable.Core.Scheduling" Version="0.0.1-alpha-20221107133213" />
+    <PackageReference Include="Dagable.Core.Scheduling" Version="0.0.1-alpha-20221223134847" />
   </ItemGroup>
 
 </Project>

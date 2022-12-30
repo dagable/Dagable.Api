@@ -1,15 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dagable.Core.Scheduling" Version="0.0.1-alpha-20221107133213" />
+    <PackageReference Include="Dagable.Core.Scheduling" Version="0.0.1-alpha-20221223134847" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Dagable.Api.Core\Dagable.Api.Core.csproj" />
+    <ProjectReference Include="..\Dagable.DataAccess\Dagable.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

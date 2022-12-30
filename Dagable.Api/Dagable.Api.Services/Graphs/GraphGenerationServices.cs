@@ -8,17 +8,15 @@ namespace Dagable.Api.Services
         /// <summary>
         /// Method used to create a standard task graph using the defeualt settings
         /// </summary>
-        /// TODO: Change this to an actual object.
         /// <returns>string version of the graoh</returns>
-        string CreateDag();
+        IStandardTaskGraph<StandardNode, StandardEdge<StandardNode>> CreateDag();
 
         /// <summary>
         /// Method used to create a standard task graph based on settings passed in
         /// </summary>
         /// <param name="graphDetails">The settings object defining the generation settings</param>
-        /// TODO: Change this to an actual object.
         /// <returns>string version of the graoh</returns>
-        string CreateDag(GenerateStandardGraphDTO graphDetails);
+        IStandardTaskGraph<StandardNode, StandardEdge<StandardNode>> CreateDag(GenerateStandardGraphDTO graphDetails);
 
         /// <summary>
         /// Method used to create a critical path task graph
@@ -28,25 +26,25 @@ namespace Dagable.Api.Services
         ICriticalPathTaskGraph CreateCriticalPathDag(GenerateCriticalGraphDTO graphsDetails);
     }
 
-    public class DagGenerationServices : IDagGenerationServices
+    public class GraphGenerationServices : IDagGenerationServices
     {
         private readonly IDagCreationService _dagCreationServices;
 
-        public DagGenerationServices(IDagCreationService dagableServices)
+        public GraphGenerationServices(IDagCreationService dagableServices)
         {
             _dagCreationServices = dagableServices;
         }
 
         /// <inheritdoc cref="IDagGenerationServices.CreateDag"/>
-        public string CreateDag()
+        public IStandardTaskGraph<StandardNode, StandardEdge<StandardNode>> CreateDag()
         {
-            return _dagCreationServices.GenerateStandardTaskGraph().ToString();
+            return _dagCreationServices.GenerateStandardTaskGraph();
         }
 
         /// <inheritdoc cref="IDagGenerationServices.CreateDag(GenerateStandardGraphDTO)"/>
-        public string CreateDag(GenerateStandardGraphDTO graphDetails)
+        public IStandardTaskGraph<StandardNode, StandardEdge<StandardNode>> CreateDag(GenerateStandardGraphDTO graphDetails)
         {
-            return _dagCreationServices.GenerateStandardTaskGraph(graphDetails.Layers, graphDetails.Nodes, (graphDetails.Percentage / 100)).ToString();
+            return _dagCreationServices.GenerateStandardTaskGraph(graphDetails.Layers, graphDetails.Nodes, (graphDetails.Percentage / 100));
         }
 
         /// <inheritdoc cref="IDagGenerationServices.CreateCriticalPathDag(GenerateCriticalGraphDTO)"/>
