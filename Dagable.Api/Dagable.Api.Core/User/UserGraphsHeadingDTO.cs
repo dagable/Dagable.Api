@@ -2,7 +2,7 @@
 
 namespace Dagable.Api.Core.User
 {
-    public class UserGraphsHeadingDTO
+    public class UserGraphsHeadingDTO 
     {
         public string Name { get; set; }
         public string Description { get; set; }

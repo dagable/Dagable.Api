@@ -11,16 +11,15 @@ using System.Threading.Tasks;
 namespace Dagable.Api.Controllers
 {
     [Route("[controller]"), ApiController]
-    public class GraphsController : ControllerBase
+    public class GraphsController : BaseController<GraphsController>
     {
-        private readonly ILogger<GraphsController> _logger;
+       
         private readonly IDagScheduleServices _dagScheduleServices;
         private readonly IDagGenerationServices _dagServices;
         private readonly IGraphServices _graphServices;
 
-        public GraphsController(ILogger<GraphsController> logger, IDagGenerationServices dagServices, IDagScheduleServices dagScheduleServices, IGraphServices graphServices)
+        public GraphsController(ILogger<GraphsController> logger, IDagGenerationServices dagServices, IDagScheduleServices dagScheduleServices, IGraphServices graphServices) : base(logger)
         {
-            _logger = logger;
             _dagServices = dagServices;
             _dagScheduleServices = dagScheduleServices;
             _graphServices = graphServices;
@@ -45,10 +44,7 @@ namespace Dagable.Api.Controllers
                 return BadRequest();
             }
             var result = await _graphServices.GetGraphWithGuid(parsedGuid);
-            return new JsonResult(new
-            {
-               graph = result,
-            });
+            return Ok(new { result });
         }
         #endregion
 
@@ -65,10 +61,7 @@ namespace Dagable.Api.Controllers
         public IActionResult Standard()
         {
             var graph = _dagServices.CreateDag();
-            return new JsonResult(new
-            {
-                graph,
-            });
+            return Ok(new { graph });
         }
 
         #endregion
@@ -77,10 +70,8 @@ namespace Dagable.Api.Controllers
         [Route("generate/standard")]
         public IActionResult Standard(GenerateStandardGraphDTO graphDetails)
         {
-            return new JsonResult(new
-            {
-                graph = _dagServices.CreateDag(graphDetails),
-            });
+            var graph = _dagServices.CreateDag(graphDetails);
+            return Ok(new {graph});
         }
 
         [HttpPost]
@@ -89,12 +80,8 @@ namespace Dagable.Api.Controllers
         public IActionResult CriticalPath(GenerateCriticalGraphDTO graphDetails)
         {
             var graph = _dagServices.CreateCriticalPathDag(graphDetails);
-            var scheduled = _dagScheduleServices.ScheduleGraph(graphDetails.Processors, graph);
-            return new JsonResult(new
-            {
-                graph,
-                schedule = scheduled
-            });
+            var schedule = _dagScheduleServices.ScheduleGraph(graphDetails.Processors, graph);
+            return Ok(new { graph, schedule });
         }
         #endregion
         #endregion
@@ -106,10 +93,7 @@ namespace Dagable.Api.Controllers
         public IActionResult ReSchedule(RescheduleGraphDTO scheduledGraph)
         {
             var schedule = _dagScheduleServices.ScheduleGraph(scheduledGraph.Processors, scheduledGraph.TaskGraph);
-            return new JsonResult(new
-            {
-                schedule
-            });
+            return Ok(schedule);
         }
         #endregion
     }

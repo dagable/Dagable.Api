@@ -17,3 +17,5 @@ Dagable.Api/Dagable.Api/Properties/PublishProfiles/ubuntu.lan_5000.pubxml
 obj/Dagable.DataAccess.Migrations.EntityFrameworkCore.targets
 Dagable.Api/Dagable.Api/nlog.config
 Dagable.Api/Dagable.Api/appsettings.Development.json
+Dagable.Api/Dagable.ErrorManagement/bin
+Dagable.Api/Dagable.ErrorManagement/obj

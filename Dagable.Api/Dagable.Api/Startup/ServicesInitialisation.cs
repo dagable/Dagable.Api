@@ -1,11 +1,16 @@
-﻿using Dagable.Api.Services;
+﻿using Dagable.Api.Models;
+using Dagable.Api.Pipeline.ActionFilters;
+using Dagable.Api.Pipeline.Filter;
+using Dagable.Api.Services;
 using Dagable.Api.Services.Graphs;
 using Dagable.Core;
 using Dagable.Core.Scheduling;
 using Dagable.DataAccess;
 using Dagable.DataAccess.Migrations;
+using Dagable.ErrorManagement;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,9 +22,10 @@ using NLog.Extensions.Logging;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using System.Text;
+using static Dagable.ErrorManagement.ErrorManager;
 
 namespace Dagable.Api.Startup
 {
@@ -29,7 +35,6 @@ namespace Dagable.Api.Startup
                                         this IServiceCollection services, WebApplicationBuilder builder)
         {
             RegisterCustomDependencies(services);
-
             RegisterSwagger(services);
             RegisterAuthDepenedencies(services, builder);
             RegisterDatabaseContextDependencies(services, builder);
@@ -47,9 +52,19 @@ namespace Dagable.Api.Startup
                .AddScoped<IUserServices, UserServices>()
                .AddScoped<IGraphServices, GraphServices>()
                .AddScoped<IGraphsRepository, GraphsRepository>()
+               .AddScoped<IDagableErrorManager, DagableErrorManager>()
                .AddDagableCoreServices()
                .AddDagableSchedulingServices()
-               .AddControllers();
+               .AddControllers(opt =>
+               {
+                   opt.Filters.Add(typeof(DagableExceptionFilter));
+               });
+
+            //ignores the InvalidModelStateResponseFactory 
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
         }
 
         private static void RegisterAuthDepenedencies(IServiceCollection services, WebApplicationBuilder builder)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Dagable.Api.Controllers
 {
     [ApiController, Route("[controller]"), Authorize]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseController<UsersController>
     {
         private readonly IUserServices _userServices;
 

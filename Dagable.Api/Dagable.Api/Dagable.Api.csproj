@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dagable.Core.Scheduling" Version="0.0.1-alpha-20221223134847" />
+    <PackageReference Include="Dagable.Core.Scheduling" Version="1.0.0-alpha-14" />
     <PackageReference Include="Logtail" Version="0.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
@@ -28,6 +28,7 @@
     <ProjectReference Include="..\Dagable.Api.Services\Dagable.Api.Services.csproj" />
     <ProjectReference Include="..\Dagable.DataAccess.Migrations\Dagable.DataAccess.Migrations.csproj" />
     <ProjectReference Include="..\Dagable.DataAccess\Dagable.DataAccess.csproj" />
+    <ProjectReference Include="..\Dagable.ErrorManagement\Dagable.ErrorManagement.csproj" />
   </ItemGroup>
 
   <ItemGroup>
