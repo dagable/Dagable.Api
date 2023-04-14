@@ -1,6 +1,4 @@
-﻿using Dagable.Api.Models;
-using Dagable.Api.Pipeline.ActionFilters;
-using Dagable.Api.Pipeline.Filter;
+﻿using Dagable.Api.Pipeline.Filter;
 using Dagable.Api.Services;
 using Dagable.Api.Services.Graphs;
 using Dagable.Core;
@@ -14,18 +12,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Extensions.Logging;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using static Dagable.ErrorManagement.ErrorManager;
 
 namespace Dagable.Api.Startup
 {

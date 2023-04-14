@@ -17,7 +17,8 @@ namespace Dagable.DataAccess
         public async Task<UserSettingsDTO> GetUserSettings(Guid userId)
         {
             var userSettings = await _dbContext.UserSettings.FirstOrDefaultAsync(x => x.UserId == userId);
-            if(userSettings == null) { 
+            if (userSettings == null)
+            {
                 return new UserSettingsDTO();
             }
             return new UserSettingsDTO
@@ -29,9 +30,10 @@ namespace Dagable.DataAccess
         }
 
         /// <inheritdoc cref="IUserRepository.UpdateUserSettings(Guid, UserSettingsDTO)"/>
-        public async Task<UserSettingsDTO> UpdateUserSettings(Guid userId, UserSettingsDTO userSettings) {
+        public async Task<UserSettingsDTO> UpdateUserSettings(Guid userId, UserSettingsDTO userSettings)
+        {
             var dbUserSettings = await _dbContext.UserSettings.FirstOrDefaultAsync(x => x.UserId == userId);
-            if(dbUserSettings == null)
+            if (dbUserSettings == null)
             {
                 await _dbContext.UserSettings.AddAsync(new Migrations.DbModels.UserSettings()
                 {
@@ -49,8 +51,8 @@ namespace Dagable.DataAccess
                 return userSettings;
             }
             dbUserSettings.IsVerticalLayout = userSettings.UseVerticalLayout;
-            dbUserSettings.NodeColor= userSettings.NodeColor;
-            dbUserSettings.NodeStyle= userSettings.NodeShape;
+            dbUserSettings.NodeColor = userSettings.NodeColor;
+            dbUserSettings.NodeStyle = userSettings.NodeShape;
             await _dbContext.SaveChangesAsync();
             return userSettings;
         }
