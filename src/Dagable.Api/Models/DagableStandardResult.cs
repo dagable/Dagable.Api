@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Dagable.Api.Models
 {
+    /// <summary>
+    /// An object that standardises the response objects from the API.
+    /// </summary>
     public class DagableStandardResult
     {
         public object? Data { get; set; }

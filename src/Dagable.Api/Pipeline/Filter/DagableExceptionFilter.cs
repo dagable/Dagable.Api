@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System.ComponentModel.DataAnnotations;
 using static Dagable.ErrorManagement.ErrorManager;
 
 namespace Dagable.Api.Pipeline.Filter
 {
+    /// <summary>
+    /// An Exception filter that will catch any unhandled exceptions and properly format the response logging
+    /// and masking the true error.
+    /// </summary>
     public class DagableExceptionFilter : ExceptionFilterAttribute
     {
         public override void OnException(ExceptionContext exceptionContext)
