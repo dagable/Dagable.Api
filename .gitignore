@@ -1,5 +1,3 @@
-**/bin/
-**/obj/
-.vs/**
-/packages/
-.vs/Dagable.Api/v17/.suo
+**/**/bin/
+**/**/obj/
+**/.vs
