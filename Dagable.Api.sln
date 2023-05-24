@@ -15,13 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dagable.DataAccess", "Dagab
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dagable.ErrorManagement", "Dagable.ErrorManagement\Dagable.ErrorManagement.csproj", "{4BB09D1C-9FF3-461B-B88D-A673AD3B8CE4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0DBF7B66-750F-4D65-AE46-5F547043C5AB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dagable.Api.Tests", "Dagable.Api.Tests\Dagable.Api.Tests.csproj", "{507A7F6F-B75C-49D5-9EDB-B93E699C6D0E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dagable.Api.Core.Tests", "Dagable.Api.Core.Tests\Dagable.Api.Core.Tests.csproj", "{25310C32-DD6D-464D-90DA-7448C4A7A2DF}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{A0776A7B-3F35-4102-8C4C-ED9087B41808}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{885A121F-8BB9-4769-A5E4-1E49433B62CC}"
 EndProject
