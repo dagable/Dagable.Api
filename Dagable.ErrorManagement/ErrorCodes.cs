@@ -25,6 +25,7 @@
             public const string INVALID_MINCOMP_VALUE = PREFIX + "018";
             public const string INVALID_MINMAXCOMP_VALUE = PREFIX + "019";
             public const string INVALID_NODE_SHAPE = "020";
+            public const string NOT_FOUND = "021";
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using Dagable.Api.Models;
 using Dagable.Api.Pipeline.ActionFilters;
-using Dagable.ErrorManagement;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -23,15 +21,6 @@ namespace Dagable.Api.Controllers
         {
             var response = new DagableStandardResult(null);
             return new UnauthorizedObjectResult(response);
-        }
-
-        public virtual ObjectResult Forbidden(DagableError error)
-        {
-            var response = new DagableStandardResult(null, true, error);
-            return new ObjectResult(response)
-            {
-                StatusCode = StatusCodes.Status403Forbidden,
-            };
         }
 
         public override OkObjectResult Ok(object? content)

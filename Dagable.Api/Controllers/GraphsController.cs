@@ -1,8 +1,8 @@
-﻿using Dagable.Api.Core;
-using Dagable.Api.Core.Graph;
+﻿using Dagable.Api.Core.Graph;
 using Dagable.Api.Services;
 using Dagable.Api.Services.Graphs;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,7 +13,7 @@ namespace Dagable.Api.Controllers
     [Route("[controller]"), ApiController]
     public class GraphsController : BaseController<GraphsController>
     {
-       
+
         private readonly IDagScheduleServices _dagScheduleServices;
         private readonly IDagGenerationServices _dagServices;
         private readonly IGraphServices _graphServices;
@@ -26,16 +26,27 @@ namespace Dagable.Api.Controllers
         }
 
         #region CRUD DB
+        /// <summary>
+        /// Saves a graph to the database for the user.
+        /// </summary>
+        /// <param name="taskGraph">A task graph that is required for saving.</param>
+        /// <returns>Ok when the graph is saved successfully</returns>
+        /// <remarks>
+        /// </remarks>
         [HttpPost]
         [Route("save")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Save(SaveGraphDTO taskGraph)
         {
-            await _graphServices.SaveGraph(taskGraph);    
+            await _graphServices.SaveGraph(taskGraph);
             return Ok();
         }
 
         [HttpGet]
         [Route("{graphId}")]
+        [Authorize]
         public async Task<ActionResult> GetGraph(string graphId)
         {
             var validGuid = Guid.TryParse(graphId, out Guid parsedGuid);
@@ -71,7 +82,7 @@ namespace Dagable.Api.Controllers
         public IActionResult Standard(GenerateStandardGraphDTO graphDetails)
         {
             var graph = _dagServices.CreateDag(graphDetails);
-            return Ok(new {graph});
+            return Ok(new { graph });
         }
 
         [HttpPost]

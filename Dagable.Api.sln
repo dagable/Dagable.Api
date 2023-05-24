@@ -13,7 +13,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dagable.DataAccess.Migratio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dagable.DataAccess", "Dagable.DataAccess\Dagable.DataAccess.csproj", "{C1E573DC-CB6A-492F-B351-D9D0F82AA2BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dagable.ErrorManagement", "Dagable.ErrorManagement\Dagable.ErrorManagement.csproj", "{4BB09D1C-9FF3-461B-B88D-A673AD3B8CE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dagable.ErrorManagement", "Dagable.ErrorManagement\Dagable.ErrorManagement.csproj", "{4BB09D1C-9FF3-461B-B88D-A673AD3B8CE4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0DBF7B66-750F-4D65-AE46-5F547043C5AB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dagable.Api.Tests", "Dagable.Api.Tests\Dagable.Api.Tests.csproj", "{507A7F6F-B75C-49D5-9EDB-B93E699C6D0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dagable.Api.Core.Tests", "Dagable.Api.Core.Tests\Dagable.Api.Core.Tests.csproj", "{25310C32-DD6D-464D-90DA-7448C4A7A2DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{A0776A7B-3F35-4102-8C4C-ED9087B41808}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{885A121F-8BB9-4769-A5E4-1E49433B62CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,9 +55,21 @@ Global
 		{4BB09D1C-9FF3-461B-B88D-A673AD3B8CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BB09D1C-9FF3-461B-B88D-A673AD3B8CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BB09D1C-9FF3-461B-B88D-A673AD3B8CE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{507A7F6F-B75C-49D5-9EDB-B93E699C6D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{507A7F6F-B75C-49D5-9EDB-B93E699C6D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{507A7F6F-B75C-49D5-9EDB-B93E699C6D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{507A7F6F-B75C-49D5-9EDB-B93E699C6D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25310C32-DD6D-464D-90DA-7448C4A7A2DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25310C32-DD6D-464D-90DA-7448C4A7A2DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25310C32-DD6D-464D-90DA-7448C4A7A2DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25310C32-DD6D-464D-90DA-7448C4A7A2DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{507A7F6F-B75C-49D5-9EDB-B93E699C6D0E} = {885A121F-8BB9-4769-A5E4-1E49433B62CC}
+		{25310C32-DD6D-464D-90DA-7448C4A7A2DF} = {885A121F-8BB9-4769-A5E4-1E49433B62CC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {934D8E00-59D3-446A-97D6-C3781B73ABE3}

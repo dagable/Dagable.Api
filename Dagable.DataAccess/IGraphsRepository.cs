@@ -1,5 +1,4 @@
 ﻿using Dagable.Api.Core.Graph;
-using Dagable.Core;
 using Dagable.DataAccess.Migrations.DbModels;
 
 namespace Dagable.DataAccess

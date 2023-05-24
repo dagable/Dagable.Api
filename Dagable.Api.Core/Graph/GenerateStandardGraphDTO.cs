@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Dagable.ErrorManagement;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Dagable.ErrorManagement;
 
-namespace Dagable.Api.Core
+namespace Dagable.Api.Core.Graph
 {
     public class GenerateStandardGraphDTO : IValidatableObject
     {

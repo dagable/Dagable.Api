@@ -17,21 +17,24 @@ namespace Dagable.DataAccess
             _dbContext = dbContext;
         }
 
+        /// <inheritdoc cref="IGraphsRepository.FindGraphForGuid(Guid, Guid)" />
         public async Task<Graph> FindGraphForGuid(Guid guid, Guid userId)
         {
             var result = await _dbContext.Graphs
                     .Include(x => x.Edges)
                     .Include(x => x.Nodes)
-                    .FirstAsync(x => x.GraphGuid == guid && x.UserId == userId);
+                    .FirstOrDefaultAsync(x => x.GraphGuid == guid && x.UserId == userId);
 
             return result;
         }
 
+        /// <inheritdoc cref="IGraphsRepository.FindAllGraphsForUser(Guid)" />
         public async Task<List<Graph>> FindAllGraphsForUser(Guid userId)
         {
             return await _dbContext.Graphs.Where(x => x.UserId == userId).ToListAsync();
         }
 
+        /// <inheritdoc cref="IGraphsRepository.FindAllGraphsForUser(Guid, SaveGraphDTO)" />
         public async Task<bool> SaveGraph(Guid userId, SaveGraphDTO taskGraph)
         {
             var graph = new Graph()

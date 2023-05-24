@@ -1,4 +1,4 @@
-﻿using Dagable.Api.Core;
+﻿using Dagable.Api.Core.Graph;
 using Dagable.Core;
 
 namespace Dagable.Api.Services

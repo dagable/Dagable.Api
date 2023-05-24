@@ -1,9 +1,17 @@
-﻿using static Dagable.ErrorManagement.ErrorManager;
+﻿using Microsoft.Extensions.Logging;
+using static Dagable.ErrorManagement.ErrorManager;
 
 namespace Dagable.ErrorManagement
 {
     public partial class DagableErrorManager : IDagableErrorManager
     {
+        private readonly ILogger<DagableErrorManager> _logger;
+
+        public DagableErrorManager(ILogger<DagableErrorManager> logger)
+        {
+            _logger = logger;
+        }
+
         private readonly List<DagableError> Errors = new()
         {
             new DagableError(ErrorCodes.INTERNAL_SERVER_ERROR, "Something went wrong with your request."),
@@ -22,6 +30,7 @@ namespace Dagable.ErrorManagement
             new DagableError(ErrorCodes.INVALID_MINCOMP_VALUE, "The minimum computation time of is not valid."),
             new DagableError(ErrorCodes.INVALID_MINMAXCOMP_VALUE, "The minimum computation time cannot be higher than the maximum computation time."),
             new DagableError(ErrorCodes.INVALID_NODE_SHAPE, "The node shape should either be box or circle."),
+            new DagableError(ErrorCodes.NOT_FOUND, "The resource you were looking for could not be found."),
         };
 
         public DagableError this[string code]
@@ -35,6 +44,18 @@ namespace Dagable.ErrorManagement
                 }
                 return error;
             }
+        }
+
+        public void LogErrorAndThrowException<T>(string message) where T : Exception
+        {
+            _logger.LogError(message);
+            throw Activator.CreateInstance(typeof(T), message) as T ?? new Exception("Error creating generic exception, last message: " + message);
+        }
+
+        public void LogWarningAndThrowException<T>(string message) where T : Exception
+        {
+            _logger.LogWarning(message);
+            throw Activator.CreateInstance(typeof(T), message) as T ?? new Exception("Error creating generic exception, last message: " + message);
         }
     }
 }

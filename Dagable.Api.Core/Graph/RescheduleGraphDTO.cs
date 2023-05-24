@@ -3,7 +3,7 @@ using Dagable.ErrorManagement;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Dagable.Api.Core
+namespace Dagable.Api.Core.Graph
 {
     public class RescheduleGraphDTO : IValidatableObject
     {

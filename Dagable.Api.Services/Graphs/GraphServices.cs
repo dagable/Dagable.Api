@@ -1,9 +1,9 @@
-﻿using Dagable.Api.Core.Graph;
+﻿using Dagable.Api.Core.Exceptions;
+using Dagable.Api.Core.Graph;
 using Dagable.Core;
 using Dagable.Core.Models;
 using Dagable.DataAccess;
-using Microsoft.EntityFrameworkCore.Update;
-using Microsoft.Extensions.Logging;
+using Dagable.ErrorManagement;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,27 +14,29 @@ namespace Dagable.Api.Services.Graphs
     {
         private readonly IGraphsRepository _graphsRepository;
         private readonly IUserServices _userServices;
-        private readonly ILogger<GraphServices> _logger;
+        private readonly IDagableErrorManager _dagableErrorManager;
 
-        public GraphServices(ILogger<GraphServices> logger, IGraphsRepository graphsRepository, IUserServices userServices)
+        public GraphServices(IGraphsRepository graphsRepository, IUserServices userServices, IDagableErrorManager dagableErrorManager)
         {
-            _logger = logger;
             _graphsRepository = graphsRepository;
             _userServices = userServices;
-        }
+            _dagableErrorManager = dagableErrorManager;
+        }   
 
+        /// <inheritdoc cref="IGraphServices.SaveGraph(SaveGraphDTO)" />
         public async Task<bool> SaveGraph(SaveGraphDTO saveGraph)
         {
             return await _graphsRepository.SaveGraph(_userServices.GetLoggedInUserId(), saveGraph);
         }
 
+        ///<inheritdoc cref="IGraphServices.GetGraphWithGuid(Guid)" />
         public async Task<ICriticalPathTaskGraph> GetGraphWithGuid(Guid guid)
         {
-            var result = await _graphsRepository.FindGraphForGuid(guid, _userServices.GetLoggedInUserId());
+            var userId = _userServices.GetLoggedInUserId();
+            var result = await _graphsRepository.FindGraphForGuid(guid, userId);
             if (result == null)
             {
-                _logger.LogError($"Graph with guid {guid} not found.");
-                throw new Exception($"Graph with guid {guid} not found.");
+                _dagableErrorManager.LogWarningAndThrowException<NotFoundException>($"Graph with guid {guid} not found for user {userId}.");
             }
 
             var graph = new TaskGraph.CriticalPath(result.Nodes.Max(x => x.Layer))
@@ -47,13 +49,11 @@ namespace Dagable.Api.Services.Graphs
             nodes.ForEach(x => graph.dagGraph.AddNode(x));
             result.Edges.ToList().ForEach(
                 x => graph.dagGraph.AddEdge(new CriticalPathEdge(
-                    nodes.First(n => n.Id == x.From.GraphNodeId), 
+                    nodes.First(n => n.Id == x.From.GraphNodeId),
                     nodes.First(n => n.Id == x.To.GraphNodeId),
-                    (int) x.CommTime)
+                    (int)x.CommTime)
                 )
             );
-
-            var s = graph.dagGraph.Edges;
 
             graph.DetermineCriticalPathLength();
 

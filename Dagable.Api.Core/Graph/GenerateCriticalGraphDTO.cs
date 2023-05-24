@@ -1,9 +1,8 @@
 ﻿using Dagable.ErrorManagement;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
-namespace Dagable.Api.Core
+namespace Dagable.Api.Core.Graph
 {
     public class GenerateCriticalGraphDTO : GenerateStandardGraphDTO, IValidatableObject
     {
@@ -44,7 +43,7 @@ namespace Dagable.Api.Core
             {
                 yield return new ValidationResult(ErrorManager.ErrorCodes.INVALID_PROCESSOR_COUNT);
             }
-            
+
             var validationResults = base.Validate(validationContext);
             foreach (var result in validationResults)
             {
