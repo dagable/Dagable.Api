@@ -31,8 +31,6 @@ namespace Dagable.Api.Controllers
         /// </summary>
         /// <param name="taskGraph">A task graph that is required for saving.</param>
         /// <returns>Ok when the graph is saved successfully</returns>
-        /// <remarks>
-        /// </remarks>
         [HttpPost]
         [Route("save")]
         [Authorize]

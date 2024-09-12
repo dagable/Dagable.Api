@@ -16,7 +16,7 @@ namespace Dagable.Api.Startup
             }
 
             app.UseCors(builder =>
-            builder
+                builder
                    .WithOrigins(app.Configuration.GetValue<string>("AppUrl").Split(','))
                    .AllowAnyHeader()
                    .AllowAnyMethod()
