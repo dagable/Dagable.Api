@@ -15,8 +15,8 @@ COPY ["Dagable.Api/Dagable.Api.csproj", "Dagable.Api/"]
 COPY ["..//Dagable.Api.Core/Dagable.Api.Core.csproj", "..//Dagable.Api.Core/"]
 COPY ["..//Dagable.ErrorManagement/Dagable.ErrorManagement.csproj", "..//Dagable.ErrorManagement/"]
 COPY ["..//Dagable.Api.Services/Dagable.Api.Services.csproj", "..//Dagable.Api.Services/"]
+COPY ["..//Dagable.DataAccess.Migrations/Dagable.DataAccess.Migrations.csproj", "..//Dagable.DataAccess.Migrations/"]
 COPY ["..//Dagable.DataAccess/Dagable.DataAccess.csproj", "..//Dagable.DataAccess/"]
-COPY ["../Dagable.DataAccess.Migrations/Dagable.DataAccess.Migrations.csproj", "../Dagable.DataAccess.Migrations/"]
 
 # Restore dependencies
 RUN dotnet restore "./Dagable.Api/Dagable.Api.csproj"
