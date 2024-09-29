@@ -12,8 +12,7 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<DagableDbContext>();
-    db.Database.Migrate();
+   scope.ServiceProvider.GetRequiredService<DagableDbContext>().Database.Migrate();
 }
 
 app.ConfigureMiddleware();

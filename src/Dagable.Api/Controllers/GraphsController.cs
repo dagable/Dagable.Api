@@ -85,7 +85,6 @@ namespace Dagable.Api.Controllers
 
         [HttpPost]
         [Route("generate/critical-path")]
-        [Authorize]
         public IActionResult CriticalPath(GenerateCriticalGraphDTO graphDetails)
         {
             var graph = _dagServices.CreateCriticalPathDag(graphDetails);
@@ -98,7 +97,6 @@ namespace Dagable.Api.Controllers
         #region Scheduling
         [HttpPost]
         [Route("schedule/reschedule")]
-        [Authorize]
         public IActionResult ReSchedule(RescheduleGraphDTO scheduledGraph)
         {
             var schedule = _dagScheduleServices.ScheduleGraph(scheduledGraph.Processors, scheduledGraph.TaskGraph);
